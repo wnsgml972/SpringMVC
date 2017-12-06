@@ -14,10 +14,10 @@ public class LoginController {
 			Model model){
 		
 		if(error != null)
-			model.addAttribute("errorMsg", "Invalid username and password");
+			model.addAttribute("errorMsg", "Invalid username and password");	//error message
 		
 		if(logout != null)
-			model.addAttribute("logoutMsg", "you have been logged out sucessfully");
+			model.addAttribute("logoutMsg", "you have been logged out sucessfully"); //error logout
 		
 		return "login";
 	}
