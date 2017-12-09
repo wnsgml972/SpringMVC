@@ -76,7 +76,8 @@ public class SubjectDAO {
 	
 	public List<Subject> getSubjectByType() {
 		String sqlStatement = "select type, sum(grade) from subjectinfo group by type";
-		return jdbcTemplate.query(sqlStatement, new RowMapper<Subject>() {
+		
+		List<Subject> result = jdbcTemplate.query(sqlStatement, new RowMapper<Subject>() {
 			
 			//receive record  ->  set Object  ->  return object
 			@Override
@@ -94,6 +95,19 @@ public class SubjectDAO {
 				return subject;
 			}
 		});
+		
+		int sum = 0;
+		
+		for(int i=0; i<result.size(); i++){
+			sum += result.get(i).getGrade();
+		}
+		
+		Subject subject = new Subject();
+		subject.setGrade(sum);
+		subject.setType("รัมก");
+		result.add(subject);
+		
+		return result;
 	}
 	
 	// query and return a multiple object
